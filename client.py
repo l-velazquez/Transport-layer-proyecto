@@ -12,7 +12,7 @@ from time import *
 
 #Adress to connect to the server
 ADDRESS = "lagrange.ccom.uprrp.edu"
-PORT = 4206
+PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 4096
 debug = 0
