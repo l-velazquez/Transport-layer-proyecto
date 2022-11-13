@@ -30,6 +30,6 @@ print(x)
 
 
 s.send(x)
-rMsg = recv(bufferSize)
+rMsg = s.recv(bufferSize)
 
 print(rMsg)
