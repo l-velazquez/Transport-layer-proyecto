@@ -27,3 +27,9 @@ print("\n",recvMsg.decode())
 
 x = pack("i",1)
 print(x)
+
+
+s.send(x)
+rMsg = recv(bufferSize)
+
+print(rMsg)
