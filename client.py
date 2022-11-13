@@ -25,3 +25,5 @@ s.settimeout(1)
 recvMsg = s.recv(bufferSize)
 print("\n",recvMsg.decode())
 
+x = pack("i",1)
+print(x)
