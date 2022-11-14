@@ -19,7 +19,7 @@ debug = 0
 #=========================================================================
 #creates the socket
 s = socket(AF_INET,SOCK_STREAM)
-s.connect(serverAddrPort)
+s.bind(serverAddrPort)
 s.settimeout(1)
 
 #=========================================================================
