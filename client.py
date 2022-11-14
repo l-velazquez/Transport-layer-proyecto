@@ -16,20 +16,39 @@ PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 4096
 debug = 0
-
+#=========================================================================
+#creates the socket
 s = socket(AF_INET,SOCK_STREAM)
 s.connect(serverAddrPort)
 s.settimeout(1)
 
-#s.bind(serverAddrPort)
+#=========================================================================
 recvMsg = s.recv(bufferSize)
 print("\n",recvMsg.decode())
 
-x = pack("i",1)
-print(x)
+try:
+    s.settimeout(2) 
+    r_pkt = s.recv(1024)
+    s.settimeout(None)
+ 
+except socket.timeout:
+    print("Timeout")
 
+
+'''
+ack = 1
+x = pack("i",ack)
+print(x)
 
 s.send(x)
 rMsg = s.recv(bufferSize)
-
+unpackedMsg = unpack('b',rMsg)
 print(rMsg)
+
+if unpackedMsg == ack+1:
+    ack += 1
+    packedMsg = pack('i',ack)
+    s.send(packedMsg)
+
+rMsg = s.recv(bufferSize)
+print(rMsg)'''
