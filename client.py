@@ -25,14 +25,18 @@ s.settimeout(1)
 #=========================================================================
 recvMsg = s.recv(bufferSize)
 print("\n",recvMsg.decode())
-
-try:
-    s.settimeout(2) 
-    r_pkt = s.recv(1024)
-    s.settimeout(None)
- 
-except socket.timeout:
-    print("Timeout")
+num = 1
+while (num <= 30):
+    s.send(pack("B",num))
+    
+    try:
+        s.settimeout(2) 
+        r_pkt = s.recv(1024)
+        s.settimeout(None)
+    
+    except socket.timeout:
+        print("Timeout")
+    num += 1
 
 
 '''
