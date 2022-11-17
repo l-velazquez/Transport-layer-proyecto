@@ -11,17 +11,14 @@ from socket import *
 from time import *
 
 #Adress to connect to the server
-ADDRESS = "lagrange.ccom.uprrp.edu"
+ADDRESS = "136.145.181.51"
 PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 4096
 debug = 0
 #=========================================================================
 #creates the socket
-s = socket(AF_INET,SOCK_STREAM)
-s.bind(serverAddrPort)
-s.settimeout(1)
-
+s = socket(AF_INET,SOCK_DGRAM)
 #=========================================================================
 recvMsg = s.recv(bufferSize)
 print("\n",recvMsg.decode())
