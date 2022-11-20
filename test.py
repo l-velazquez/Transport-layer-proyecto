@@ -1,5 +1,8 @@
 from struct import *
 from socket import *
+import sys
+
+print(sys.argv[0])
 
 
 def packP(ack,checksum,message):
@@ -12,7 +15,7 @@ def packP(ack,checksum,message):
 ADDRESS = "136.145.181.51"
 PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
-bufferSize = 4096
+bufferSize = 1024
 debug = 0
 
 s = socket(AF_INET,SOCK_DGRAM)
