@@ -32,7 +32,7 @@ for i in rfile:
     print(toSend)
     s.sendto(toSend,serverAddrPort)
     x = s.recv(bufferSize)
-    print(x)
+    print(x.decode())
     
 
 
