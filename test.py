@@ -5,7 +5,7 @@ from socket import *
 def packP(ack,checksum,message):
     p1 = pack('B',ack)#send ack
     p2 = pack('I',checksum)#checksum
-    p3 = message.encode()
+    p3 = pack('H',message)
     pf = p1 + p2 + p3
     return pf
 
@@ -24,7 +24,7 @@ f = open("Message.txt",'r')
 rfile = f.readlines()
 for i in rfile:
     checksum = seq + len(i)
-    toSend = packP(seq,checksum,i)
+    toSend = packP(seq,checksum,len(i))
     print(toSend)
     s.sendto(toSend,serverAddrPort)
     x = s.recv(bufferSize)
