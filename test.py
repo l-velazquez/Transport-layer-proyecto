@@ -9,6 +9,7 @@ def packP(ack,checksum,message):
     p1 = pack('B',ack)#send ack
     p2 = pack('I',checksum)#checksum
     p3 = pack('H',message)
+    print("sending", ack,checksum,message)
     pf = p1 + p2 + p3
     return pf
 
