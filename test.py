@@ -2,7 +2,7 @@ from struct import *
 from socket import *
 import sys
 
-print(sys.argv[0])
+print(sys.argv[1])
 
 
 def packP(ack,checksum,message):
@@ -13,7 +13,7 @@ def packP(ack,checksum,message):
     return pf
 
 ADDRESS = "136.145.181.51"
-PORT = 4205
+PORT = 4206
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 1024
 debug = 0
