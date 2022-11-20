@@ -24,7 +24,9 @@ f = open("Message.txt",'r')
 rfile = f.readlines()
 for i in rfile:
     checksum = seq + len(i)
-    s.sendto(packP(seq,checksum,i),serverAddrPort)
+    toSend = packP(seq,checksum,i)
+    print(toSend)
+    s.sendto(toSend,serverAddrPort)
     x = s.recv(bufferSize)
     print(x)
     
