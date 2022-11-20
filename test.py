@@ -14,7 +14,7 @@ def packP(ack,checksum,message):
     return pf
 
 ADDRESS = "136.145.181.51"
-PORT = 4205
+PORT = 4206
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 4096
 debug = 0
@@ -31,7 +31,9 @@ for i in rfile:
     toSend = packP(seq,checksum,len(i))
     print(toSend)
     s.sendto(toSend,serverAddrPort)
-    x = s.recv(bufferSize)
+    try:
+        x = s.recv(bufferSize)
+    except
     print(x.decode())
     
 
