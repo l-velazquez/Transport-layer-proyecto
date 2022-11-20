@@ -22,8 +22,7 @@ s = socket(AF_INET,SOCK_DGRAM)
 
 seq = 0
 checksum = 0
-msg = s.recv(bufferSize)
-print(msg.decode())
+
 f = open("Message.txt",'r')
 rfile = f.readlines()
 for i in rfile:
