@@ -16,7 +16,7 @@ def packP(ack,checksum,message):
 ADDRESS = "136.145.181.51"
 PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
-bufferSize = 1024
+bufferSize = 4096
 debug = 0
 
 s = socket(AF_INET,SOCK_DGRAM)
