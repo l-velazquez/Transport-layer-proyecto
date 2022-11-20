@@ -13,7 +13,7 @@ def packP(ack,checksum,message):
     return pf
 
 ADDRESS = "136.145.181.51"
-PORT = 4206
+PORT = 4205
 serverAddrPort = (ADDRESS,PORT)
 bufferSize = 1024
 debug = 0
