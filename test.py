@@ -34,8 +34,12 @@ for i in rfile:
     try:
         s.settimeout(2)
         x = s.recv(bufferSize)
-    except:
         print(x.decode())
+        s.settimeout(None)
+    except socket.timeout:
+        s.sendto(toSend,serverAddrPort)
+        
+        
     
 
 
