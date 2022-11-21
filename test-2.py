@@ -22,10 +22,9 @@ debug = 0
 s = socket(AF_INET,SOCK_DGRAM)
 
 
-x = input("What is the seq num?:")
-y = input("What is the chcksum")
-z = input("What is the message len?")
-
+x = int(input("What is the seq num?:"))
+y = int(input("What is the chcksum"))
+z = int(input("What is the message len?"))
 p = packP(x,y,z)
 
 s.sendto(p,serverAddrPort)
