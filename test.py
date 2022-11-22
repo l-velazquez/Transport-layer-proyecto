@@ -2,7 +2,7 @@ from struct import *
 from socket import *
 import sys
 
-print(sys.argv[1])
+#print(sys.argv[1])
 
 
 def packP(ack,checksum,message):
@@ -25,19 +25,18 @@ seq = 0
 checksum = 0
 
 f = open("Message.txt",'r')
-rfile = f.readlines()
+rfile = f.read()
+print(rfile)
+
 for i in rfile:
     checksum = seq + len(i)
     toSend = packP(seq,checksum,len(i))
     print(toSend)
     s.sendto(toSend,serverAddrPort)
-    try:
-        s.settimeout(2)
-        x = s.recv(bufferSize)
-        print(x.decode())
-        s.settimeout(None)
-    except socket.timeout:
-        s.sendto(toSend,serverAddrPort)
+    print(s.settimeout(2))
+    x = s.recv(bufferSize)
+    print(x.decode())
+    s.send(toSend,serverAddrPort)
         
         
     
