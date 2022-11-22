@@ -4,13 +4,19 @@ import sys
 
 #print(sys.argv[1])
 
+def checksum(sq,msgLen,byteMsg):
+    chksum = sq + msgLen + byteMsg
+    return checksum
 
-def packP(ack,checksum,message):
+
+def packP(ack,checksum,msgLen,message):
     p1 = pack('B',ack)#send ack
     p2 = pack('I',checksum)#checksum
-    p3 = pack('H',message)
-    print("sending", ack,checksum,message)
-    pf = p1 + p2 + p3
+    p3 = pack('H',msgLen)#
+    p4 = message.ecode()
+
+    print("sending", ack,checksum,msgLen,message)
+    pf = p1 + p2 + p3 + p4
     return pf
 
 ADDRESS = "136.145.181.51"
@@ -25,12 +31,16 @@ seq = 0
 checksum = 0
 
 f = open("Message.txt",'r')
-rfile = f.read()
+rfile = f.readlines()
 print(rfile)
 
 for i in rfile:
-    checksum = seq + len(i)
-    toSend = packP(seq,checksum,len(i))
+    msgB = bytes(i,'ascii')
+    lenMsgB = sum(msgB)
+    lenMsg = len(i)
+    print("Hello",type(seq),type(lenMsgB),type(lenMsg))
+    chksum = checksum(seq,lenMsg,lenMsgB)
+    toSend = packP(seq,chksum,lenMsg,i)
     print(toSend)
     s.sendto(toSend,serverAddrPort)
     print(s.settimeout(2))
@@ -42,7 +52,7 @@ for i in rfile:
     
 
 
-p = bytes("Hello world!",'utf-8')
+p = bytes("Hello world!",'ascii')
 print(p)
 print(len(p))
 
