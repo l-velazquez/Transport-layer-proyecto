@@ -4,20 +4,29 @@ import sys
 
 #print(sys.argv[1])
 
-def checksum(sq,msgLen,byteMsg):
-    chksum = sq + msgLen + byteMsg
-    return checksum
+#Calculate checksum
+def checksum(sq,msgLen,bMsg):
+    chksum = sq + msgLen + bMsg
+    return chksum
 
-
+#Pack the package to send to the server
 def packP(ack,checksum,msgLen,message):
     p1 = pack('B',ack)#send ack
     p2 = pack('I',checksum)#checksum
-    p3 = pack('H',msgLen)#
-    p4 = message.ecode()
+    p3 = pack('H',msgLen)#message length
+    p4 = message.encode()#message encode
 
-    print("sending", ack,checksum,msgLen,message)
+    #print("sending", ack,checksum,msgLen,message)
     pf = p1 + p2 + p3 + p4
     return pf
+
+#Byte representation
+def byteR(i):
+    msgB = bytes(i,'ascii')
+    MsgBsum = sum(msgB)
+    lenMsg = len(i)
+    return MsgBsum,lenMsg
+
 
 ADDRESS = "136.145.181.51"
 PORT = 4206
@@ -27,39 +36,31 @@ debug = 0
 
 s = socket(AF_INET,SOCK_DGRAM)
 
+#Initializing sequence number and cheaksum
 seq = 0
-checksum = 0
+chksum = 0
 
+#opening file
 f = open("Message.txt",'r')
 rfile = f.readlines()
 print(rfile)
 
 for i in rfile:
-    msgB = bytes(i,'ascii')
-    lenMsgB = sum(msgB)
-    lenMsg = len(i)
-    print("Hello",type(seq),type(lenMsgB),type(lenMsg))
-    chksum = checksum(seq,lenMsg,lenMsgB)
-    toSend = packP(seq,chksum,lenMsg,i)
-    print(toSend)
-    s.sendto(toSend,serverAddrPort)
-    print(s.settimeout(2))
+    #sum of the byte representation and length
+    MsgBsum ,lenMsg = byteR(i) 
+    #print("Hello",type(seq),type(lenMsgB),type(lenMsg))
+    chksum = checksum(seq,lenMsg,MsgBsum)
+    pack2send = packP(seq,chksum,lenMsg,i)
+    #print(pack2send)
+    s.sendto(pack2send,serverAddrPort)
     x = s.recv(bufferSize)
-    print(x.decode())
-    s.send(toSend,serverAddrPort)
+    #print(x)
+    msgUnpacked = unpack("B",x)
+    print("ACK:",msgUnpacked[0])
+    seq += 1
         
         
-    
 
-
-p = bytes("Hello world!",'ascii')
-print(p)
-print(len(p))
-
-ack = 0
-checksum = 0
-sum = 0
-send2server = []
 
 for i in rfile:
     checksum = ack + len(i)   
