@@ -57,8 +57,8 @@ rfile = f.readlines()
 
 for i in rfile:
     #sum of the byte representation and length
-    MsgBsum ,lenMsg = byteR(i) 
-    chksum = checksum(seq,lenMsg,MsgBsum)
+    msgBsum ,lenMsg = byteR(i) 
+    chksum = checksum(seq,lenMsg,msgBsum)
     ack = 0
 
     #print("Packing:",seq,chksum,lenMsg,i)
