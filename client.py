@@ -40,9 +40,9 @@ def packP(ack,checksum,msgLen,message):
 #Byte representation
 def byteR(i):
     msgB = bytes(i,'ascii')
-    MsgBsum = sum(msgB)
+    msgBsum = sum(msgB)
     lenMsg = len(i)
-    return MsgBsum,lenMsg
+    return msgBsum,lenMsg
 
 s = socket(AF_INET,SOCK_DGRAM)
 
