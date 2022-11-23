@@ -59,6 +59,7 @@ for i in rfile:
     #sum of the byte representation and length
     MsgBsum ,lenMsg = byteR(i) 
     chksum = checksum(seq,lenMsg,MsgBsum)
+    ack = 0
 
     #print("Packing:",seq,chksum,lenMsg,i)
     pack2send = packP(seq,chksum,lenMsg,i)
@@ -80,14 +81,17 @@ for i in rfile:
             break
 
         ack = unpack("B",x)[0]
+        
         if ack == seq+1:
             print("ACK:",ack)
+            seq += 1
             break
         else: 
-            print("ack",ack)
+            print("Ack",ack)
+            seq = ack
             continue
-
-    seq = ack
+    
+    
         
         
 
