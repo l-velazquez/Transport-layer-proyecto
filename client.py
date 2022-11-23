@@ -10,6 +10,7 @@ from socket import *
 import sys
 
 #print(sys.argv[1])
+#when final the user need to input the file it wants
 if len(sys.argv) < 2:
     print("You need to insert the file to send")
 
@@ -57,28 +58,36 @@ rfile = f.readlines()
 for i in rfile:
     #sum of the byte representation and length
     MsgBsum ,lenMsg = byteR(i) 
-    print("Checksum:",seq,lenMsg,MsgBsum)
     chksum = checksum(seq,lenMsg,MsgBsum)
-    print("Packing",seq,chksum,lenMsg,i)
+
+    #print("Packing:",seq,chksum,lenMsg,i)
     pack2send = packP(seq,chksum,lenMsg,i)
+    if debug:
+        print("Elements to calculate checksum:",seq,lenMsg,MsgBsum)
+        print("Checksum =",chksum)
+        print("Package to send:",pack2send)
 
     #print(pack2send)
     while True:
         s.sendto(pack2send,serverAddrPort)
-
+        print("Sending package",seq)
         try:
             s.settimeout(2)
             x = s.recv(bufferSize)
         except:
             print("Timeout")
             s.sendto(pack2send,serverAddrPort)
-        #print(x)
-        msgUnpacked = unpack("B",x)[0]
-        if msgUnpacked == seq+1:
-            print("ACK:",msgUnpacked)
-        else:
+            break
 
-    seq += 1
+        ack = unpack("B",x)[0]
+        if ack == seq+1:
+            print("ACK:",ack)
+            break
+        else: 
+            print("ack",ack)
+            continue
+
+    seq = ack
         
         
 
