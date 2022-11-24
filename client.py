@@ -63,6 +63,7 @@ for i in rfile:
 
     #print("Packing:",seq,chksum,lenMsg,i)
     pack2send = packP(seq,chksum,lenMsg,i)
+
     if debug:
         print("Elements to calculate checksum:",seq,lenMsg,msgBsum)
         print("Checksum =",chksum)
@@ -86,11 +87,14 @@ for i in rfile:
             print("ACK:",ack)
             seq += 1
             break
+        elif ack > seq+1:
+            seq += 1
+            print("ack",ack)
         else: 
             print("Ack",ack)
             seq = ack
             continue
-    
+        
     
         
         
