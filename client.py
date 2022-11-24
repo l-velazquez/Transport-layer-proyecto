@@ -3,6 +3,12 @@
     Course: CCOM 4205 - Computer Networks
     Project: Transport layer - TCP
 
+    Discription: 
+    This program will send a packege to a server
+    that will act as a tcp connection. This client
+    will send the sequence number, checksum and
+    payload length and the payload it self. 
+
 """
 
 from struct import *
@@ -80,13 +86,14 @@ for i in rfile:
             print("Timeout")
             s.sendto(pack2send,serverAddrPort)
             break
-
+        #unpack the message that is an acknowlage 
         ack = unpack("B",x)[0]
         
         if ack == seq+1:
             print("ACK:",ack)
             seq += 1
             break
+        #added this to make the code funtion
         elif ack > seq+1:
             seq += 1
             print("ack",ack)
@@ -95,7 +102,7 @@ for i in rfile:
             seq = ack
             continue
         
-    
+print("\nThanks for using the UDP+ service. Reliable sending your message. Thanks!")
         
         
 
