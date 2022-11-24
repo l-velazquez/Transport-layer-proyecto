@@ -101,9 +101,11 @@ for i in rfile:
             print("Ack",ack)
             seq = ack
             continue
-        
-print("\nThanks for using the UDP+ service. Reliable sending your message. Thanks!")
-        
+
+
+print("-"*75)     
+print("\nThanks for using the UDP+ service. Reliably sending your message. Thanks!\n")
+print("-"*75)           
         
 
 
