@@ -19,6 +19,7 @@ import sys
 #when final the user need to input the file it wants
 if len(sys.argv) < 2:
     print("You need to insert the file to send")
+file = sys.argv[1]
 
 #static variables
 ADDRESS = "136.145.181.51"
@@ -57,7 +58,7 @@ seq = 0
 chksum = 0
 
 #opening file
-f = open("Message.txt",'r')
+f = open(file,'r')
 rfile = f.readlines()
 #print(rfile)
 
